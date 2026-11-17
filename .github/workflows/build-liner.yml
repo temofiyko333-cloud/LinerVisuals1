@@ -22,11 +22,14 @@ jobs:
         with:
           distribution: temurin
           java-version: '8'
-      - name: Build mod
+      - name: Build with Gradle 7.4.2
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: '7.4.2'
+          arguments: build --no-daemon
+        env:
+          GRADLE_OPTS: '-Xmx3G'
         working-directory: source/linervisuals
-        run: |
-          chmod +x gradlew
-          ./gradlew build --no-daemon
       - name: Upload mod JAR
         uses: actions/upload-artifact@v4
         with:
