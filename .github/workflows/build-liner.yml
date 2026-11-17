@@ -26,6 +26,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '8'
+      - name: Fix official Minecraft mappings in Freecam
+        working-directory: source/linervisuals
+        run: |
+          sed -i 's/net.minecraft.client.settings.GameSettings/net.minecraft.client.Options/' src/main/java/com/liner/visuals/Freecam.java
+          sed -i 's/GameSettings o = mc.options;/net.minecraft.client.Options o = mc.options;/' src/main/java/com/liner/visuals/Freecam.java
       - name: Build with Gradle wrapper
         working-directory: source/linervisuals
         run: |
