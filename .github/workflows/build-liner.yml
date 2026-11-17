@@ -1,0 +1,35 @@
+name: Build Liner Visuals (Forge 1.16.5)
+on:
+  push:
+    paths:
+      - 'LinerVisuals-forge-1.16.5-ready-project.zip'
+      - '.github/workflows/build-liner.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check project archive
+        run: test -f LinerVisuals-forge-1.16.5-ready-project.zip
+      - name: Extract project
+        run: |
+          mkdir source
+          unzip -q LinerVisuals-forge-1.16.5-ready-project.zip -d source
+          test -f source/linervisuals/gradlew
+      - name: Set up Java 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+      - name: Build mod
+        working-directory: source/linervisuals
+        run: |
+          chmod +x gradlew
+          ./gradlew build --no-daemon
+      - name: Upload mod JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: LinerVisuals-Forge-1.16.5
+          path: source/linervisuals/build/libs/*.jar
+          if-no-files-found: error
