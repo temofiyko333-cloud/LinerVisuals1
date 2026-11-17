@@ -2,7 +2,7 @@ name: Build Liner Visuals (Forge 1.16.5)
 on:
   push:
     paths:
-      - 'LinerVisuals-forge-1.16.5-ready-project.zip'
+      - '*.zip'
       - '.github/workflows/build-liner.yml'
   workflow_dispatch:
 jobs:
@@ -10,12 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check project archive
-        run: test -f LinerVisuals-forge-1.16.5-ready-project.zip
+      - name: Find project archive
+        run: |
+          archive="$(find . -maxdepth 1 -type f -name 'LinerVisuals-forge-1.16.5-ready-project*.zip' -print -quit)"
+          test -n "$archive"
+          echo "PROJECT_ARCHIVE=$archive" >> "$GITHUB_ENV"
       - name: Extract project
         run: |
           mkdir source
-          unzip -q LinerVisuals-forge-1.16.5-ready-project.zip -d source
+          unzip -q "$PROJECT_ARCHIVE" -d source
           test -f source/linervisuals/gradlew
           test -f source/linervisuals/build.gradle
       - name: Set up Java 8
