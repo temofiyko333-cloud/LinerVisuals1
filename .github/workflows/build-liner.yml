@@ -26,6 +26,13 @@ jobs:
         with:
           distribution: temurin
           java-version: '8'
+      - name: Diagnose mappings and Freecam source
+        working-directory: source/linervisuals
+        run: |
+          echo '--- build.gradle ---'
+          cat build.gradle
+          echo '--- Freecam.java ---'
+          sed -n '1,180p' src/main/java/com/liner/visuals/Freecam.java
       - name: Fix official Minecraft mappings in Freecam
         working-directory: source/linervisuals
         run: |
