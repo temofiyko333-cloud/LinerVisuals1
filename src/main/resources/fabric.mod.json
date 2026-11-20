@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "the_watcher",
+  "version": "${version}",
+  "name": "The Watcher",
+  "description": "A nighttime horror mod. The Watcher begins appearing after the first two nights.",
+  "authors": ["LinerMax"],
+  "license": "All-Rights-Reserved",
+  "environment": "*",
+  "entrypoints": { "main": ["com.linermax.thewatcher.TheWatcherMod"] },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
