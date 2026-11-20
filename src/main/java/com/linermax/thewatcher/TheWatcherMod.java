@@ -104,8 +104,8 @@ public class TheWatcherMod implements ModInitializer {
         player.sendMessage(Text.literal("§c§lВХІДНИЙ ДЗВІНОК"), false);
         player.sendMessage(Text.literal("§8Невідомий номер: §f..."), false);
         player.sendMessage(Text.literal("§7§oНе відповідай. Він уже в будинку."), false);
-        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundCategory.AMBIENT, 1.4f, 0.65f);
-        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_NOTE_BLOCK_BELL, SoundCategory.AMBIENT, 1.2f, 0.55f);
+        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_NOTE_BLOCK_BELL.value(), SoundCategory.AMBIENT, 1.4f, 0.65f);
+        world.playSound(null, player.getBlockPos(), SoundEvents.BLOCK_NOTE_BLOCK_BELL.value(), SoundCategory.AMBIENT, 1.2f, 0.55f);
     }
 
     private static void playKnock(ServerWorld world, net.minecraft.server.network.ServerPlayerEntity player) {
